@@ -15,6 +15,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -53,7 +54,6 @@ public class KeyedID_Login
 		dr.findElement(By.xpath(Attributes().getProperty("UN"))).sendKeys(TestData().getProperty("UN"));
 		dr.findElement(By.xpath(Attributes().getProperty("Pwd"))).sendKeys(TestData().getProperty("Pwd"));
 		dr.findElement(By.xpath(Attributes().getProperty("Click"))).click();
-		dr.findElement(By.xpath(Attributes().getProperty("Home"))).click();
 		String Str1 = dr.getPageSource();
 		String Str2 = "User Name";
 		if(Str1.contains(Str2))
@@ -64,6 +64,9 @@ public class KeyedID_Login
 		{
 			System.out.println("Logged In Successfully");
 		}	
+		dr.findElement(By.xpath(Attributes().getProperty("Home"))).click();
+		
+		
 		
 		}catch(NullPointerException e){
 			System.out.println(e);
