@@ -1,10 +1,16 @@
 package pak1;
 
+import java.awt.Menu;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SalesOrder_1 extends KeyedID_Login
 {
@@ -12,9 +18,9 @@ public class SalesOrder_1 extends KeyedID_Login
 	public static void main (String[] args) throws IOException
 	{
 		Login1();
-		/*MenuList("Test");
+		MenuList("Test");
 		MenuList(); 
-		Pagination();*/
+		Pagination();
 		Sortorder();
 	}
 
@@ -75,27 +81,24 @@ public class SalesOrder_1 extends KeyedID_Login
 	
 	public static void Sortorder() throws IOException
 	{
-		dr.manage().window().maximize();
+		try{
 		dr.get(Attributes().getProperty("URL"));
 		List<WebElement> LWB3 = dr.findElements(By.tagName("th"));
 		int Len = LWB3.size();
 		System.out.println("Size: "+ Len);
-		String St1 = "/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[3]/div[2]/div/table/thead/tr/th[";
-		String St2 = "]";
-		for(int i=2;i<=Len;i++)
+		
+		List<WebElement> LWB4 = dr.findElements(By.tagName("td"));
+		for(WebElement L2 : LWB4)
 		{
-			String Value = dr.findElement(By.xpath(St1+i+St2)).getText();
-			System.out.print(Value);
-			dr.findElement(By.xpath(St1+i+St2)).click();
-			
-		}
-		
-		
-		
-		/*for(WebElement WE1 : LWB3)
-		{
-			String Str1 = WE1.getText();
-			System.out.println("Sort Order Column: "+Str1);
-		}*/
+			if(L2.getText().contains("Sales Order Date"))
+			{
+				String M1 = L2.getText();   
+				List<String> ml = new ArrayList<String>();
+				ml.add(M1);
+				System.out.println("Values Values Values: "+M1);
+			}
+		}	
+		}catch(StaleElementReferenceException e){System.out.println(e);}
+		 System.out.println("rest of the code...");  
 	}
 }
