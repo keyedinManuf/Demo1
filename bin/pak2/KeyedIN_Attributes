@@ -15,20 +15,13 @@ Popup1 = /html/body/div[1]/div/div/div[1]
 
 
 LWB1 = /html/body/div[2]/div/div[1]/div[2]/div/ul/li[1]/ul/li[1]/ul
-Pagination = /html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[3]/div[2]/div/table/tbody/tr
-
-
-********* SalesOrder_2 *********
-SONum = 1005
-SOAcc = PizzaShack 
-SOAcc1 = Hamp
-
+Pagination1 = /html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[3]/div[2]/div/table/tbody/tr
 
 Search = /html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[2]/ul/li[9]/button[1]
 
 
-
-
+MassPrint = /html/body/div[2]/div/div[1]/div[2]/div/ul/li[1]/ul/li[1]/ul/li[2]/div[1]/a[3]
+Pagination2 = /html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div[2]/div[2]/div[3]/div[3]/div/table/tbody/tr
 
 
 

@@ -1,2 +1,12 @@
+********* Login Credentials *********
 UN = lizc-admin
 Pwd = password
+
+********* SalesOrder_2 *********
+SONum = 1100
+SDate = 6/24/2015
+EDate = 6/24/2015
+SOAcc1 = John Deere WTW	
+State = MN
+BUnit = KI Bikes
+Status = New

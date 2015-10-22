@@ -1,9 +1,7 @@
 package pak1;
 
-import java.awt.Menu;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -20,8 +18,9 @@ public class SalesOrder_1 extends KeyedID_Login
 		Login1();
 		MenuList("Test");
 		MenuList(); 
-		Pagination();
-		Sortorder();
+		Pagination1();
+		Pagination2();
+		//Sortorder();
 	}
 
 	public static String MenuList(String Menu) throws IOException
@@ -68,14 +67,27 @@ public class SalesOrder_1 extends KeyedID_Login
 		}
 	}
 	
-	public static void Pagination() throws IOException
+	public static void Pagination1() throws IOException
 	{
 		dr.get(Attributes().getProperty("URL"));
-		int rowCount=dr.findElements(By.xpath(Attributes().getProperty("Pagination"))).size();
+		int rowCount=dr.findElements(By.xpath(Attributes().getProperty("Pagination1"))).size();
 		if(rowCount==50)
 		{
 			System.out.println("******************** Scenario 2b ***********************");
-			System.out.println("For Pagination count of records in each page: "+rowCount);
+			System.out.println("Pagination of records for each page in Sales Order Listing screen are: "+rowCount);
+		}
+	}
+	
+	public static void Pagination2() throws IOException
+	{
+		dr.findElement(By.xpath(Attributes().getProperty("MassPrint"))).click();
+		WebDriverWait wait = new WebDriverWait(dr, 30);
+		wait.until(ExpectedConditions.textToBePresentInElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[1]/label/em"), "Sales Order Listing"));
+		int rowCount=dr.findElements(By.xpath(Attributes().getProperty("Pagination2"))).size();
+		if(rowCount==50)
+		{
+			System.out.println("******************** Scenario 4a ***********************");
+			System.out.println("Pagination of records for each page in Sales Order Listing screen are: "+rowCount);
 		}
 	}
 	
