@@ -3,6 +3,7 @@ package pak1;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -25,7 +26,9 @@ public class SalesOrder_1 extends KeyedID_Login
 
 	public static String MenuList(String Menu) throws IOException
 	{		
+		try{
 		WebElement WB1 = dr.findElement(By.xpath(Attributes().getProperty("L1")));
+		
 		List<WebElement> L1 = WB1.findElements(By.tagName("a"));
 		for(WebElement W1 : L1)
 		{
@@ -39,7 +42,8 @@ public class SalesOrder_1 extends KeyedID_Login
 				}
 			}			
 		}		
-		return (Menu);
+		}catch (NoSuchElementException e){System.out.println("Invalid Element: "+e);}
+		return Menu;
 	}
 	
 	public static void MenuList() throws IOException
@@ -76,6 +80,10 @@ public class SalesOrder_1 extends KeyedID_Login
 			System.out.println("******************** Scenario 2b ***********************");
 			System.out.println("Pagination of records for each page in Sales Order Listing screen are: "+rowCount);
 		}
+		else
+		{
+			System.out.println("Pagination of records are changed from 50 and the current count is : "+rowCount);
+		}
 	}
 	
 	public static void Pagination2() throws IOException
@@ -88,6 +96,11 @@ public class SalesOrder_1 extends KeyedID_Login
 		{
 			System.out.println("******************** Scenario 4a ***********************");
 			System.out.println("Pagination of records for each page in Mass Print Sales Order Acknowledgments screen are: "+rowCount);
+		}
+		
+		else
+		{
+			System.out.println("Pagination of records are changed from 50 and the current count is : "+rowCount);
 		}
 	}
 	

@@ -4,7 +4,11 @@ UN = /html/body/div/div/form/ul/li[1]/input
 Pwd = /html/body/div/div/form/ul/li[2]/input
 Click = /html/body/div/div/form/ul/li[3]/input
 Home = /html/body/div[1]/ul[2]/li[1]/div/a/span
+	Changed Home to 
+	   /html/body/div[2]/ul[2]/li[1]/div/a/span
 SO = /html/body/div[1]/ul[2]/li[2]/div/a/span
+
+
 
 ********* Add Sales Order *********
 L1 = /html/body/div[2]/div/div[1]/div[2]/div/ul
