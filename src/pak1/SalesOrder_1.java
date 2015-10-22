@@ -87,7 +87,7 @@ public class SalesOrder_1 extends KeyedID_Login
 		if(rowCount==50)
 		{
 			System.out.println("******************** Scenario 4a ***********************");
-			System.out.println("Pagination of records for each page in Sales Order Listing screen are: "+rowCount);
+			System.out.println("Pagination of records for each page in Mass Print Sales Order Acknowledgments screen are: "+rowCount);
 		}
 	}
 	
