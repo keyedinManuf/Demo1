@@ -109,10 +109,16 @@ public class AddSalesOrder extends KeyedID_Login{
 			dr.findElement(By.id("s2id_autogen6_search")).sendKeys("Test");
 			System.out.println("Start WAIT");
 			//dr.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
-			WebDriverWait wait = new WebDriverWait(dr, 40);
+			WebDriverWait wait = new WebDriverWait(dr, 35);
 			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("select2-results-6")));
 			
 			System.out.println("STOP WAIT");
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			dr.findElement(By.id("s2id_autogen6_search")).sendKeys(Keys.TAB);
 			
 			

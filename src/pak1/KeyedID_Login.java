@@ -49,7 +49,7 @@ public class KeyedID_Login
 	public static void Login1() throws IOException
 	{
 		try{
-		
+		dr.manage().window().maximize();
 		dr.get(Attributes().getProperty("URL"));
 		dr.findElement(By.xpath(Attributes().getProperty("UN"))).sendKeys(TestData().getProperty("UN"));
 		dr.findElement(By.xpath(Attributes().getProperty("Pwd"))).sendKeys(TestData().getProperty("Pwd"));
