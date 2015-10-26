@@ -72,8 +72,8 @@ public class AddSalesOrder extends KeyedID_Login{
 		dr.findElement(By.id("s2id_autogen4_search")).sendKeys("Test");
 		//List<WebElement> LW2 = dr.findElements(By.id("select2-results-4"));
 		List<WebElement> LW2 = dr.findElements(By.xpath("/html/body/div[6]/ul/li"));
-		String S3 = "/html/body/div[6]/ul/li[";
-		String S4 = "]";
+		String S3 = "/html/body/div[6]/ul/li/div/span";
+		String S4 = "]/div/span";
 		Random ran2 = new Random();
 		int i1 = ran.nextInt(LW1.size());
 		System.out.println("SO Status Main Value : "+i1);
@@ -85,16 +85,16 @@ public class AddSalesOrder extends KeyedID_Login{
 			int j1 = ran.nextInt(j);
 			i1 =i1+j;
 			System.out.println("SO Status If Modified : "+i1);
-			dr.findElement(By.xpath(S3+1+S4)).click();
+			//dr.findElement(By.xpath(S3)).click();
 			dr.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);	
-			dr.findElement(By.xpath(S3+1+S4)).sendKeys(Keys.TAB);
+			dr.findElement(By.xpath(S3)).sendKeys(Keys.TAB);
 		}
 		
-		else
+/*		else
 		{
 			System.out.println("SO Status Else : "+i1);
 			dr.findElement(By.xpath(S3+i1+S4)).click();
-		}	
+		}	*/
 		
 		System.out.println("Success");    	    
 		}catch (NoSuchElementException e){System.out.println(e);}
@@ -120,7 +120,13 @@ public class AddSalesOrder extends KeyedID_Login{
 				e.printStackTrace();
 			}
 			dr.findElement(By.id("s2id_autogen6_search")).sendKeys(Keys.TAB);
-			
+			dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[3]/div/button[1]")).click();
+			System.out.println("New Order is created Successfully");
+			WebDriverWait wait1 = new WebDriverWait(dr, 20);
+			wait1.until(ExpectedConditions.textToBePresentInElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[1]/label/em"), "Sales Order"));
+			WebElement WW2 = dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div/fieldset[1]/div/div/div/div[1]/div[1]/div/div/div[2]/div/div[1]/span"));
+			System.out.println("Created Order Number is: "+WW2.getText());
+			dr.close();
 			
 		}catch(IllegalArgumentException e){System.out.println(e);}
 	}
