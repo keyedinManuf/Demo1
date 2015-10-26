@@ -25,7 +25,8 @@ public class AddSalesOrder extends KeyedID_Login{
 		Login1();
 		NewSalesOrder();
 		Businessunit();
-		dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[3]/div/button[1]")).click();
+		//dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[3]/div/button[1]")).click();
+		
 	}
 	
 	public static void NewSalesOrder() throws IOException
