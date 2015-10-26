@@ -19,20 +19,23 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AddSalesOrder extends KeyedID_Login{
 
+	public static String OrderNum;
 	public static void main(String[] args) throws IOException 
 	{
+		
 		dr.manage().window().maximize();
 		Login1();
 		NewSalesOrder();
 		Businessunit();
-		//dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[3]/div/button[1]")).click();
-		
+		//Click To Create New Sales Order
+		dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[3]/div/button[1]")).click();
+		Check();
+		SearchOrder();
 	}
 	
 	public static void NewSalesOrder() throws IOException
 	{
 		try{
-
 		dr.get("http://kimdev01.keyedinuat.com/Dev03/Form/Create/70");
 		
 		WebDriverWait wait = new WebDriverWait(dr, 20);
@@ -42,22 +45,21 @@ public class AddSalesOrder extends KeyedID_Login{
 		dr.findElement(By.id("select2-chosen-2")).click();
 		dr.findElement(By.id("s2id_autogen2_search")).sendKeys("Test");
 		dr.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		//List<WebElement> LW1 = dr.findElements(By.id("select2-results-2"));
 		List<WebElement> LW1 = dr.findElements(By.xpath("/html/body/div[5]/ul/li"));
 		
 		String S1 = "/html/body/div[5]/ul/li[";
 		String S2 = "]";
 		Random ran = new Random();
 		int i = ran.nextInt(LW1.size());
-		System.out.println("Client Main Value : "+i);
+		//System.out.println("Client Main Value : "+i);
 		if(i==0)
 		{
-			System.out.println("If : "+i);
+			//System.out.println("If : "+i);
 			int j = 6;
 			Random ran1 = new Random();
 			int j1 = ran.nextInt(j);
 			i =i+j;
-			System.out.println("Client If Modified : "+i);
+			//System.out.println("Client If Modified : "+i);
 			dr.findElement(By.xpath(S1+2+S2)).click();
 			dr.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		}
@@ -71,49 +73,40 @@ public class AddSalesOrder extends KeyedID_Login{
 		//SO Status
 		dr.findElement(By.id("select2-chosen-4")).click();
 		dr.findElement(By.id("s2id_autogen4_search")).sendKeys("Test");
-		//List<WebElement> LW2 = dr.findElements(By.id("select2-results-4"));
 		List<WebElement> LW2 = dr.findElements(By.xpath("/html/body/div[6]/ul/li"));
 		String S3 = "/html/body/div[6]/ul/li/div/span";
 		String S4 = "]/div/span";
 		Random ran2 = new Random();
 		int i1 = ran.nextInt(LW1.size());
-		System.out.println("SO Status Main Value : "+i1);
+		//System.out.println("SO Status Main Value : "+i1);
 		if(i1==0)
 		{
-			System.out.println("If : "+i1);
+			//System.out.println("If : "+i1);
 			int j = 1;
 			Random ran3 = new Random();
 			int j1 = ran.nextInt(j);
 			i1 =i1+j;
-			System.out.println("SO Status If Modified : "+i1);
-			//dr.findElement(By.xpath(S3)).click();
+			//System.out.println("SO Status If Modified : "+i1);
 			dr.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);	
 			dr.findElement(By.xpath(S3)).sendKeys(Keys.TAB);
 		}
-		
-/*		else
-		{
-			System.out.println("SO Status Else : "+i1);
-			dr.findElement(By.xpath(S3+i1+S4)).click();
-		}	*/
-		
-		System.out.println("Success");    	    
+    	    
 		}catch (NoSuchElementException e){System.out.println(e);}
 	}
 	
-	public static void Businessunit()
+	public static String Businessunit()
 	{
 		try
 		{
 			System.out.println("BusinessUnit Selection");
 			dr.findElement(By.id("select2-chosen-6")).click();
 			dr.findElement(By.id("s2id_autogen6_search")).sendKeys("Test");
-			System.out.println("Start WAIT");
+			//System.out.println("Start WAIT");
 			//dr.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
 			WebDriverWait wait = new WebDriverWait(dr, 35);
 			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("select2-results-6")));
 			
-			System.out.println("STOP WAIT");
+			//System.out.println("STOP WAIT");
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
@@ -122,13 +115,48 @@ public class AddSalesOrder extends KeyedID_Login{
 			}
 			dr.findElement(By.id("s2id_autogen6_search")).sendKeys(Keys.TAB);
 			dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[3]/div/button[1]")).click();
-			System.out.println("New Order is created Successfully");
+			System.out.println("New Order is created successfully");
 			WebDriverWait wait1 = new WebDriverWait(dr, 20);
 			wait1.until(ExpectedConditions.textToBePresentInElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[1]/label/em"), "Sales Order"));
 			WebElement WW2 = dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div/fieldset[1]/div/div/div/div[1]/div[1]/div/div/div[2]/div/div[1]/span"));
-			System.out.println("Created Order Number is: "+WW2.getText());
-			dr.close();
+			OrderNum = WW2.getText();
+			System.out.println("Created Order Number is: "+OrderNum);
+			
 			
 		}catch(IllegalArgumentException e){System.out.println(e);}
+		return OrderNum;
+	}
+	
+	public static void Check()
+	{
+		String Str1 = "is required.";
+		String Str2 = dr.getPageSource();
+		dr.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		if(Str2.contains(Str1))
+		{
+			WebElement WBB1 = dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div/div[1]/p/a"));
+			System.out.println("Mandatory Field - "+WBB1.getText()+ " is Missing");
+		}
+		else
+		{
+			System.out.println("New Order is created successfully");
+		}
+		dr.close();		
+	}
+	
+	public static void SearchOrder()
+	{
+		dr.get("http://kimdev01.keyedinuat.com/Dev03/Tab/71");
+		dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div/ul/li[1]/ul/li[1]/ul/li[3]/div[1]/a[3]")).click();
+		dr.findElement(By.id("Name")).sendKeys("1190");
+		dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[2]/ul/li[9]/button[1]")).click();
+		System.out.println("Entered Order Number is filtered in the below list");
+		dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[3]/div/div/a")).click();
+		try {
+			Runtime.getRuntime().exec("D:/4_Others/3_Backup/AutoIT/Export.exe");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
