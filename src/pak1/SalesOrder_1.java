@@ -21,7 +21,7 @@ public class SalesOrder_1 extends KeyedID_Login
 		MenuList(); 
 		Pagination1();
 		Pagination2();
-		//Sortorder();
+		Pagination3();
 	}
 
 	public static String MenuList(String Menu) throws IOException
@@ -82,7 +82,8 @@ public class SalesOrder_1 extends KeyedID_Login
 		}
 		else
 		{
-			System.out.println("Pagination of records are changed from 50 and the current count is : "+rowCount);
+			System.out.println("******************** Scenario 2b ***********************");
+			System.out.println("Pagination of records in Sales Order Listing screen are changed from 50. The current count is : "+rowCount);
 		}
 	}
 	
@@ -100,7 +101,29 @@ public class SalesOrder_1 extends KeyedID_Login
 		
 		else
 		{
-			System.out.println("Pagination of records are changed from 50 and the current count is : "+rowCount);
+			System.out.println("******************** Scenario 4a ***********************");
+			System.out.println("Pagination of records in Mass Print Sales Order Acknowledgments screen are changed from 50. The current count is : "+rowCount);
+		}
+	}
+	
+	public static void Pagination3() throws IOException
+	{
+		dr.get("http://kimdev01.keyedinuat.com/Dev03/List/303");
+		dr.get(Attributes().getProperty("SODeli"));
+		WebDriverWait wait = new WebDriverWait(dr, 30);
+		wait.until(ExpectedConditions.textToBePresentInElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[1]/label/em"), "Sales Order Delivery Listing"));
+		
+		int rowCount=dr.findElements(By.xpath(Attributes().getProperty("Pagination3"))).size();
+		if(rowCount==50)
+		{
+			System.out.println("******************** Scenario 8 ***********************");
+			System.out.println("Pagination of records for each page in  Sales Order Delivery Listing screen are: "+rowCount);
+		}
+		
+		else
+		{
+			System.out.println("******************** Scenario 8 ***********************");
+			System.out.println("Pagination of records in  Sales Order Delivery Listing screen are changed from 50. The current count is : "+rowCount);
 		}
 	}
 	
