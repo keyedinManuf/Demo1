@@ -11,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.google.gson.annotations.Until;
+
 public class SalesOrder_1 extends KeyedID_Login
 {
 	public static String Str1 = "Sales Order";
@@ -22,53 +24,84 @@ public class SalesOrder_1 extends KeyedID_Login
 		Pagination1();
 		Pagination2();
 		Pagination3();
+		dr.close();
 	}
 
 	public static String MenuList(String Menu) throws IOException
 	{		
-		try{
-		WebElement WB1 = dr.findElement(By.xpath(Attributes().getProperty("L1")));
+	try{
+		String St1 = dr.getPageSource();
+		String St2 = "Sales Orders";
 		
-		List<WebElement> L1 = WB1.findElements(By.tagName("a"));
-		for(WebElement W1 : L1)
+		if(St1.contains(St2))
+			{	
+				WebElement WB1 = dr.findElement(By.xpath(Attributes().getProperty("L1")));
+				List<WebElement> L1 = WB1.findElements(By.tagName("a"));
+				
+				for(WebElement W1 : L1)
+				{			
+					if(W1.getText().length()!=0)
+					{
+						if(W1.getText().contains(Str1))
+						{
+							System.out.println("******************** Scenario 1 ***********************");
+							System.out.println("Sales Order Menu is displayed in the Menu list");
+							Menu = WB1.getText();								
+						}
+					}
+				}	
+			}
+		else
 		{
-			if(W1.getText().length()!=0)
-			{
-				if(W1.getText().contains(Str1))
-				{
-					System.out.println("******************** Scenario 1 ***********************");
-					System.out.println("Sales Order Menu is displayed in the Menu list");
-					Menu = WB1.getText();								
-				}
-			}			
-		}		
-		}catch (NoSuchElementException e){System.out.println("Invalid Element: "+e);}
-		return Menu;
+			System.out.println("******************** Scenario 1 ***********************");
+			System.out.println("Sales Order Menu not displayed in the Menu list");
+		}			
+			}catch (NoSuchElementException e){System.out.println("Invalid Element: "+e);}
+			return Menu;
 	}
 	
 	public static void MenuList() throws IOException
 	{
-		dr.findElement(By.xpath(Attributes().getProperty("SO"))).click();
-		List<WebElement> LWB1 = dr.findElements(By.xpath(Attributes().getProperty("LWB1")));
-														  
-		for(WebElement L1 : LWB1)
+		dr.get("http://kimdev01.keyedinuat.com/Dev03/Tab/71");
+		String Source1 = dr.getPageSource();
+		if(Source1.contains("Sales Orders"))
+		{
+			List<WebElement> LWB1 = dr.findElements(By.xpath(Attributes().getProperty("LWB1")));
+															  
+			for(WebElement L1 : LWB1)
+			{
+				System.out.println("******************** Scenario 1b ***********************");
+				System.out.println("Menus Under Sales Order");
+				System.out.println("-----------------------------------");
+				System.out.println(L1.getText());
+			}
+		}
+		else
 		{
 			System.out.println("******************** Scenario 1b ***********************");
-			System.out.println("Menus Under Sales Order");
-			System.out.println("-----------------------------------");
-			System.out.println(L1.getText());
+			System.out.println("Sales Order Not Displayed in the menu list");
 		}
-	
-		dr.get("http://kimdev01.keyedinuat.com/Dev03/Tab/73");
-		List<WebElement> LWB2 = dr.findElements(By.xpath(Attributes().getProperty("LWB1")));
-		
-		for(WebElement L1 : LWB2)
-		{
-			System.out.println("******************** Scenario 1c ***********************");
-			System.out.println("Menus Under Sales Order Deliveries");
-			System.out.println("-----------------------------------");
-			System.out.println(L1.getText());
-		}
+
+			//Start
+			dr.get("http://kimdev01.keyedinuat.com/Dev03/Tab/73");
+			String Source2 = dr.getPageSource();
+			if(Source2.contains("Sales Order Deliveries"))
+			{	
+					List<WebElement> LWB2 = dr.findElements(By.xpath(Attributes().getProperty("LWB1")));
+					
+					for(WebElement L1 : LWB2)
+					{
+						System.out.println("******************** Scenario 1c ***********************");
+						System.out.println("Menus Under Sales Order Deliveries");
+						System.out.println("-----------------------------------");
+						System.out.println(L1.getText());
+					}
+			}
+			else
+			{
+				System.out.println("******************** Scenario 1b ***********************");
+				System.out.println("Sales Order Deliveries Not Displayed in the menu list");
+			}
 	}
 	
 	public static void Pagination1() throws IOException
