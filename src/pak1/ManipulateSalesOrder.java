@@ -13,7 +13,7 @@ public class ManipulateSalesOrder extends KeyedID_Login
 	public static void main(String[] args) throws IOException 
 	{
 		Login1();
-		EditSO();
+		ViewSO();
 	}
 	
 	public static void EditSO() throws IOException
@@ -67,4 +67,23 @@ public class ManipulateSalesOrder extends KeyedID_Login
 		String OrderNum = WB1.getText();
 		System.out.println(OrderNum+" is updated successfully");
 	}
+	
+	public static void ViewSO() throws IOException
+	{
+		dr.get(Attributes().getProperty("URL"));
+		String x1 = "/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[3]/div[2]/div/table/tbody/tr[";
+		String x2 = "]/td[1]/div[2]/a[6]";
+		String x3 = "/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[3]/div[2]/div/table/tbody/tr[";
+		String x4 = "]/td[1]/div[2]/ul/li[3]";
+		WebElement table = dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[3]/div[2]/div/table"));
+		List<WebElement> allRows = table.findElements(By.tagName("tr"));
+		int TableSize = allRows.size()-1;
+		Random rand = new Random(System.currentTimeMillis());
+		int rval = rand.nextInt(TableSize);
+		System.out.println("R Order: "+rval);
+		dr.findElement(By.xpath(x1+rval+x2)).click();
+		dr.findElement(By.xpath(x3+rval+x4)).click();		
+		WebElement WW2 = dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div/fieldset[1]/div/div/div/div[1]/div[1]/div/div/div[2]/div/div[1]/span"));
+		System.out.println("Order Number is: "+WW2.getText());
+	}	
 }
