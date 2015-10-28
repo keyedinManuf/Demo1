@@ -14,6 +14,7 @@ public class ManipulateSalesOrder extends KeyedID_Login
 	{
 		Login1();
 		ViewSO();
+		DeleteSO();
 	}
 	
 	public static void EditSO() throws IOException
@@ -85,5 +86,30 @@ public class ManipulateSalesOrder extends KeyedID_Login
 		dr.findElement(By.xpath(x3+rval+x4)).click();		
 		WebElement WW2 = dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div/fieldset[1]/div/div/div/div[1]/div[1]/div/div/div[2]/div/div[1]/span"));
 		System.out.println("Order Number is: "+WW2.getText());
-	}	
+	}
+	
+	public static void DeleteSO() throws IOException
+	{
+		dr.get(Attributes().getProperty("URL"));
+		//Random Order Navigate
+		String x1 = "/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[3]/div[2]/div/table/tbody/tr[";
+		String x2 = "]/td[1]/div[2]/a[6]";
+		//Random Delete Button
+		String x3 = "/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[3]/div[2]/div/table/tbody/tr[";
+		String x4 = "]/td[1]/div[2]/ul/li[5]";
+		//Random Order Number
+		String x5 = "/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[3]/div[2]/div/table/tbody/tr[";
+		String x6 = "]/td[3]/div/a";
+		WebElement table = dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[3]/div[2]/div/table"));
+		List<WebElement> allRows = table.findElements(By.tagName("tr"));
+		int TableSize = allRows.size()-1;
+		Random rand = new Random(System.currentTimeMillis());
+		int rval = rand.nextInt(TableSize);
+		System.out.println("R Order: "+rval);
+		dr.findElement(By.xpath(x1+rval+x2)).click();
+		String S1 = dr.findElement(By.xpath(x5+rval+x6)).getText();
+		System.out.println("Order Number to be Delete : "+S1);
+		dr.findElement(By.xpath(x3+rval+x4)).click();	
+		dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[1]/button[1]")).click();	
+	}
 }
