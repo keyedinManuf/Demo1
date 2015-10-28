@@ -39,7 +39,8 @@ public class SalesOrder_2 extends KeyedID_Login {
 			dr.findElement(By.id("s2id_autogen2_search")).sendKeys(TestData().getProperty("SOAcc1"));
 			dr.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 			List<WebElement> WW1 = dr.findElements(By.id("select2-results-2"));
-			Random rand = new Random();
+
+			Random rand = new Random(System.currentTimeMillis());
 			WebElement link = WW1.get(rand.nextInt(WW1.size()));
 			link.click();
 			
