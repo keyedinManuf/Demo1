@@ -51,15 +51,12 @@ public class AddSalesOrder extends KeyedID_Login{
 		String S2 = "]";
 		Random ran = new Random();
 		int i = ran.nextInt(LW1.size());
-		//System.out.println("Client Main Value : "+i);
 		if(i==0)
 		{
-			//System.out.println("If : "+i);
 			int j = 6;
 			Random ran1 = new Random();
 			int j1 = ran.nextInt(j);
 			i =i+j;
-			//System.out.println("Client If Modified : "+i);
 			dr.findElement(By.xpath(S1+2+S2)).click();
 			dr.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		}
@@ -78,15 +75,12 @@ public class AddSalesOrder extends KeyedID_Login{
 		String S4 = "]/div/span";
 		Random ran2 = new Random();
 		int i1 = ran.nextInt(LW1.size());
-		//System.out.println("SO Status Main Value : "+i1);
 		if(i1==0)
 		{
-			//System.out.println("If : "+i1);
 			int j = 1;
 			Random ran3 = new Random();
 			int j1 = ran.nextInt(j);
 			i1 =i1+j;
-			//System.out.println("SO Status If Modified : "+i1);
 			dr.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);	
 			dr.findElement(By.xpath(S3)).sendKeys(Keys.TAB);
 		}
@@ -101,16 +95,12 @@ public class AddSalesOrder extends KeyedID_Login{
 			System.out.println("BusinessUnit Selection");
 			dr.findElement(By.id("select2-chosen-6")).click();
 			dr.findElement(By.id("s2id_autogen6_search")).sendKeys("Test");
-			//System.out.println("Start WAIT");
-			//dr.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
 			WebDriverWait wait = new WebDriverWait(dr, 35);
 			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("select2-results-6")));
 			
-			//System.out.println("STOP WAIT");
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			dr.findElement(By.id("s2id_autogen6_search")).sendKeys(Keys.TAB);
@@ -155,7 +145,6 @@ public class AddSalesOrder extends KeyedID_Login{
 		try {
 			Runtime.getRuntime().exec("D:/4_Others/3_Backup/AutoIT/Export.exe");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

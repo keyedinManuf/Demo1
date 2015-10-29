@@ -38,11 +38,6 @@ public class KeyedID_AddSalesOrder extends KeyedID_Login
 		}
 		}
 		dr.findElement(By.xpath("/html/body/div/form/div[2]/div[2]/div[2]/div[2]/div/table/tbody/tr[1]/td[1]/a")).click();
-
-	    //Select the default window again
-
-		//dr.switchTo().window(Win1);
-		
 	}
 	
 	public static void G4() throws IOException {
