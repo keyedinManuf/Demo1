@@ -7,21 +7,22 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AddSOLine extends KeyedID_Login{
 
+	public static String Str;
+	public static WebDriver dr = new FirefoxDriver();
 	public static void main(String[] args) throws IOException 
 	{
 		Login1();
-		test();
-		//NewSalesOrder();
-		//EditSO();
-		/*ViewSO();
-		DeleteSO();*/		
+		NewSalesOrder();
+		test();	
 	}
 
 	public static void NewSalesOrder() throws IOException
@@ -44,10 +45,10 @@ public class AddSOLine extends KeyedID_Login{
 		dr.findElement(By.xpath("html/body/div[8]/ul/li[1]/div")).click();
 		dr.findElement(By.xpath(".//button[@class='btn btn-xs btn-success']")).click();
 		WebElement WE1 = dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div/fieldset[1]/div/div/div/div[1]/div[1]/div/div/div[2]/div/div[1]/span"));
-		String Str = WE1.getText();
+		Str = WE1.getText();
 		System.out.println("New Sales Order Created Succesfully & Order Number is: "+Str);		
 
-		//Search
+		/*//Search
 		System.out.println("************** SALES ORDER SEARCH **************");
 		dr.get(Attributes().getProperty("URL"));
 		dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[2]/ul/li[1]/input[1]")).click();
@@ -66,7 +67,7 @@ public class AddSOLine extends KeyedID_Login{
 			else
 			{
 				System.out.println("Entered Order Number "+ Str +" is not filtered in the below list");
-			}		
+			}	*/	
 	}
 	
 	public static void AddSalesOrderLine()
@@ -214,13 +215,13 @@ public class AddSOLine extends KeyedID_Login{
 		System.out.println("************** SALES ORDER SEARCH **************");
 		dr.get(Attributes().getProperty("URL"));
 		dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[2]/ul/li[1]/input[1]")).click();
-		dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[2]/ul/li[1]/input[1]")).sendKeys("2000");
+		dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[2]/ul/li[1]/input[1]")).sendKeys(Str);
 		dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[2]/ul/li[9]/button[1]")).click();
 		System.out.println("Wait Start");
 		dr.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 		WebElement V1 = dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[3]/div[2]/div/table/tbody/tr/td[3]/div/a"));
 		Dimension C1 = V1.getSize();
-		int Val = 2000;
+		String Val = Str;
 		System.out.println("V1: "+C1);
 			if(C1==null)
 			{

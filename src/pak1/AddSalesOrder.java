@@ -29,7 +29,7 @@ public class AddSalesOrder extends KeyedID_Login{
 		Businessunit();
 		//Click To Create New Sales Order
 		dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[3]/div/button[1]")).click();
-		Check();
+		//Check();
 		SearchOrder();
 	}
 	
@@ -138,7 +138,7 @@ public class AddSalesOrder extends KeyedID_Login{
 	{
 		dr.get("http://kimdev01.keyedinuat.com/Dev03/Tab/71");
 		dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div/ul/li[1]/ul/li[1]/ul/li[3]/div[1]/a[3]")).click();
-		dr.findElement(By.id("Name")).sendKeys("1190");
+		dr.findElement(By.id("Name")).sendKeys();
 		dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[2]/div/div[2]/div[2]/ul/li[9]/button[1]")).click();
 		System.out.println("Entered Order Number is filtered in the below list");
 		dr.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div/form/div[3]/div/div/a")).click();
